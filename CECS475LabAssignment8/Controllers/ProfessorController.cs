@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CECS475LabAssignment8.Controllers
 {
-    [Route("professor")]
+    [Route("Professor")]
     public class ProfessorController : Controller
     {
         // GET: /<controller>/
@@ -65,19 +65,19 @@ namespace CECS475LabAssignment8.Controllers
             return View(theReview);
 
         }
-        [Route("{Create}")]
+        [Route("Create")]
         public IActionResult Create()
         {
             return View();
         }
 
-        [Route("{AddReview}/{id}")]
+        [Route("AddReview/{id}")]
         public IActionResult AddReview(int? id)
         {
             return View();
         }
 
-        [Route("{Reviews}/{id}")]
+        [Route("Reviews/{id}")]
         public IActionResult Reviews(int? id)
         {
             List<Review> reviewCollec = new List<Review>();
