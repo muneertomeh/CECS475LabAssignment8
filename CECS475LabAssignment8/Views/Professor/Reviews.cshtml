@@ -1,0 +1,35 @@
+﻿@model CECS475LabAssignment8.Models.Professor
+@{ 
+    Layout = "_Layout";
+}
+
+            <td>
+               @Html.DisplayFor(professor => Model.ProfessorID)
+            
+                @Html.DisplayFor(professor => Model.Name)
+
+            </td>
+            <td>
+                <table>
+                    @foreach (var theReview in Model.ReviewCollection)
+                    {
+                    <tr>
+                        @Html.DisplayFor(review => theReview.Content);
+                    </tr>
+                    <tr>
+                        @Html.DisplayFor(review => theReview.Author);
+
+                    </tr>
+
+                    <tr>
+                        @Html.DisplayFor(review => theReview.Posted)
+                    </tr>
+                       
+                    }
+                </table>
+
+             </td>
+           
+        
+        
+    }

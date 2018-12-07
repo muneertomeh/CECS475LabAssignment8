@@ -11,9 +11,9 @@ namespace CECS475LabAssignment8.Controllers
     public class HomeController : Controller
     {
         // GET: /<controller>/
-        public string Index()
+        public IActionResult Index()
         {
-            return "Hello, ASP.NET Core";
+            return View();
         }
     }
 }
