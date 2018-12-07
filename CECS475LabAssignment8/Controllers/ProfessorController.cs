@@ -71,6 +71,12 @@ namespace CECS475LabAssignment8.Controllers
             return View();
         }
 
+        [Route("{AddReview}/{id}")]
+        public IActionResult AddReview(int? id)
+        {
+            return View();
+        }
+
         [Route("{Reviews}/{id}")]
         public IActionResult Reviews(int? id)
         {

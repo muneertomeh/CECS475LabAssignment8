@@ -9,25 +9,30 @@
     Below are some of the latest reviews and ratings for our professors 
 </p>
 
+
+
+
 <div class="blog-posts">
-   @foreach(var professor in Model)
-   {
-       <table>
-           <tr>
-               @Html.Partial("_Post", professor);
-               <td>
-                   @Html.ActionLink("Edit", "Edit", new { id = professor.ProfessorID })
-                   @Html.ActionLink("Reviews", "Reviews", new { id = professor.ProfessorID });
-                   @Html.ActionLink("Delete", "Delete", new { id = professor.ProfessorID });
-
-               </td>
-           </tr>
-       
-
-    </table>
-       
     
+    @Html.ActionLink("Create", "Create");
 
-    
-   }
+    @foreach (var professor in Model)
+    {
+        <table>
+            <tr>
+                @Html.Partial("_Post", professor);
+                <td>
+                    @Html.ActionLink("Reviews", "Reviews", "Professor", new { id = professor.ProfessorID })
+                    @Html.ActionLink("AddReview", "AddReview", "Professor", new { id = professor.ProfessorID }) |
+
+                </td>
+            </tr>
+
+
+        </table>
+
+
+
+
+    }
 </div>
