@@ -88,16 +88,15 @@ namespace CECS475LabAssignment8.Controllers
 
 
         [HttpPost, Route("Create")]
-        public IActionResult Create(Professor theProfessor)
+        public async Task<IActionResult> Create([Bind("ProfessorID, Name")]Professor theProfessor)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View();
-            } 
-                
-            _db.Professors.Add(theProfessor);
-            _db.SaveChanges();
-
+                _db.Professors.Add(theProfessor);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            
             return View(theProfessor);
         }
 
@@ -113,17 +112,32 @@ namespace CECS475LabAssignment8.Controllers
             {
                 return NotFound();
             }
-            return View(professor);
+            //Since the professor has been found...
+            return View(new Review());
         }
 
 
         [HttpPost, Route("AddReview/{id}")]
-        public IActionResult AddReview(int? id, Review theReview)
+        public async Task<IActionResult> AddReview(int id, [Bind("Author, Content", "Title")]Review r)
         {
-            _db.Reviews.Add(theReview);
-            _db.SaveChanges();
+
+            if(ModelState.IsValid == true)
+            {
+
+                var reviewsCollection = from review in _db.Reviews select review;
+                var reviewsList = reviewsCollection.ToList();
+                int count = reviewsList.Count;
+
+                r.ReviewID = count + 1;
+                r.ProfessorID = id;
+                r.Posted = DateTime.Now.ToUniversalTime();
+                _db.Reviews.Add(r);
+                await _db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
             
-            return View();
+            
+            return View(r);
         }
 
 
@@ -148,27 +162,13 @@ namespace CECS475LabAssignment8.Controllers
             {
                 professor.ReviewCollection.Add(rev);
             }
-            return View(professor);
 
+            if(professor.ReviewCollection != null)
+            {
+                return View(professor);
+            }
 
-
-
-            //List<Review> reviewCollec = new List<Review>();
-            //reviewCollec.Add(new Review
-            //{
-
-            //    Content = "Cool thing Boss",
-            //    Posted = DateTime.Now.ToUniversalTime(),
-            //    Author = "Muneer Tomeh"
-            //}
-            //);
-
-            //Professor theUltimate = new Professor()
-            //{
-            //    Name = "Phuong Nguyen",
-            //    ProfessorID = 1,
-            //    ReviewCollection = reviewCollec
-            //};
+            return RedirectToAction("Index");
 
 
         }
