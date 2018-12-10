@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CECS475LabAssignment8.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/posts/{professorKey}/comments")]
     public class ReviewsController : Controller
     {
         private readonly AcademicContext _db;
