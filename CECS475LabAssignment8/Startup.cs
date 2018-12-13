@@ -6,6 +6,7 @@ using CECS475LabAssignment8.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +28,7 @@ namespace CECS475LabAssignment8
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            
 
 
             services.AddDbContext<AcademicContext>(options =>
@@ -35,6 +36,19 @@ namespace CECS475LabAssignment8
                 var connectionString = Configuration.GetConnectionString("AcademicContext");
                 options.UseSqlServer(connectionString);
             });
+
+            services.AddDbContext<IdentityDataContext>(options =>
+            {
+                var connectionString = Configuration.GetConnectionString("IdentityDataContext");
+                options.UseSqlServer(connectionString);
+            });
+
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityDataContext>() ;
+
+
+            services.AddMvc();
 
         }
 
@@ -62,6 +76,9 @@ namespace CECS475LabAssignment8
                 }
                 await next();
             });
+
+            app.UseIdentity();
+
 
             app.UseMvc(routes =>
             {
