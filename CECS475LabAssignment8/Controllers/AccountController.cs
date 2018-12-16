@@ -75,14 +75,14 @@ namespace CECS475LabAssignment8.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel registration)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(registration);
             }
 
             var newUser = new IdentityUser
             {
-                Email = registration.EmailAddress,
+                Email = registration.EmailAddress, 
                 UserName = registration.EmailAddress,
             };
 

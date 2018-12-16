@@ -1,5 +1,9 @@
 ﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
 @model CECS475LabAssignment8.Models.Account.LoginViewModel
+@{
+    Layout = "_Layout";
+
+}
 
 
 <fieldset class="account">
@@ -9,23 +13,15 @@
     <form role="form" asp-action="Login">
 
         <div asp-validation-summary="All" class="input-validation-error"></div>
-    
+
         <div class="form-group">
-            <label asp-for="EmailAddress"></label>
-            <input type="email" asp-for="EmailAddress" class="form-control" />
-            <span asp-validation-for="EmailAddress" class="field-validation-error"></span>
+            @Html.LabelFor(u => u.EmailAddress);
+            @Html.EditorFor(u => u.EmailAddress);
         </div>
 
         <div class="form-group">
-            <label asp-for="Password"></label>
-            <input type="password" asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="field-validation-error"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="ConfirmPassword"></label>
-            <input type="password" asp-for="ConfirmPassword" class="form-control" />
-            <span asp-validation-for="ConfirmPassword" class="field-validation-error"></span>
+            @Html.LabelFor(u=> u.Password);
+            @Html.EditorFor(u=> u.Password);
         </div>
 
         <div class="form-group">

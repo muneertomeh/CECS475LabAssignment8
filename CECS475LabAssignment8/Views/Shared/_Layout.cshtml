@@ -33,13 +33,13 @@
           </ul>
         </li>
 
-          <li>
+          <li> 
               @if (User.Identity.IsAuthenticated)
               {
-                  <form id="logout" action="@Url.Action("Logout", "Account")" method="post">
-                      <a href="javascript: $('#logout').submit()"class="last">
+                  <form id="logout" href="@Url.Action("Logout", "Account")" method="POST">
+                      <a href="javascript: $('#logout').submit()" class="last">
                           Logout
-                          <br /><span class="tagline">@User.Identity</span>
+                          <br /><span class="tagline">@User.Identity.Name</span>
                       </a>
 
                   </form>
